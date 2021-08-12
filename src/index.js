@@ -21,7 +21,7 @@ function circle() {
     if (circleX - radius < 0 || circleX + radius > canvas.width) {
         speedX *= -1;
     }
-    if (circleY - radius < 0 || circleY + radius > canvas.height) {
+    if (circleY - radius < 0 || (circleY + radius > playerY && circleX + radius > playerX && circleX - radius < playerX + 250)) {
         speedY *= -1;
     }
     circleY += speedY;

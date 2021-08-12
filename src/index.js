@@ -33,8 +33,14 @@ function bar() {
     ctx.fillRect(playerX, playerY, 250, 20);
 }
 
+function onMove(event) {
+    playerX = event.offsetX;
+}
+
 setInterval(function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     circle();
     bar();
 }, 20) 
+
+canvas.addEventListener("mousemove", onMove);

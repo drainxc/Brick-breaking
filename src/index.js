@@ -6,9 +6,27 @@ canvas.height = 700;
 
 let circleX = 750;
 let circleY = 350;
+let radius = 20;
+let speedX = 5;
+let speedY = 5;
 
-setInterval(function () {
-    ctx.arc(circleX, circleY, 20, 0, Math.PI*2);
+function circle() {
+    ctx.beginPath();
+    ctx.arc(circleX, circleY, radius, 0, Math.PI*2);
     ctx.fillStyle = "blue";
     ctx.fill();
-}, 20)
+    ctx.closePath();
+    if (circleX - radius < 0 || circleX + radius > canvas.width) {
+        speedX *= -1;
+    }
+    if (circleY - radius < 0 || circleY + radius > canvas.height) {
+        speedY *= -1;
+    }
+    circleY += speedY;
+    circleX += speedX;
+}
+
+setInterval(function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    circle();
+}, 20) 

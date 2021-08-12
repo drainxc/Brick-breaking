@@ -7,36 +7,42 @@ canvas.height = 700;
 let circleX = 750;
 let circleY = 350;
 let radius = 20;
-let speedX = 5;
-let speedY = 5;
+let speedX = 7;
+let speedY = 7;
 let playerX = 750;
 let playerY = 675;
 
+let game = false;
 let death = false;
 
 function circle() {
     ctx.beginPath();
-    ctx.arc(circleX, circleY, radius, 0, Math.PI*2);
+    ctx.arc(circleX, circleY, radius, 0, Math.PI * 2);
     ctx.fillStyle = "blue";
     ctx.fill();
     ctx.closePath();
-    if (circleX - radius < 0 || circleX + radius > canvas.width) {
-        speedX *= -1;
-    }
-    if (circleY - radius < 0 || (circleY + radius > playerY && circleX + radius > playerX && circleX - radius < playerX + 250)) {
-        speedY *= -1;
-    }
-    if (circleY + radius > canvas.height) {
-        if (!death) {
-            let input = confirm('gameover\n다시 하시겠습니까?');
-            if (input) {
-                location.reload();
+    if (game && !death) {
+        if (circleX - radius < 0 || circleX + radius > canvas.width) {
+            speedX *= -1;
+        }
+        if (circleY - radius < 0 || (circleY + radius > playerY && circleX + radius > playerX && circleX - radius < playerX + 250)) {
+            speedY *= -1;
+        }
+        if (circleY + radius > canvas.height) {
+            if (!death) {
+                let input = confirm('gameover\n다시 하시겠습니까?');
+                if (input) {
+                    location.reload();
+                }
+                death = true;
+                circleY = canvas.height - radius;
             }
-            death = true;
+        }
+        if (!death) {
+            circleY += speedY;
+            circleX += speedX; 
         }
     }
-    circleY += speedY;
-    circleX += speedX;
 }
 
 function bar() {
@@ -50,10 +56,17 @@ function onMove(event) {
     playerX = event.offsetX - 125;
 }
 
+function start() {
+    if (!game && !death) {
+        game = true;
+    }
+}
+
 setInterval(function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     circle();
     bar();
-}, 20) 
+}, 20)
 
-canvas.addEventListener("mousemove", onMove);
+document.addEventListener('click', start);
+document.addEventListener('mousemove', onMove);

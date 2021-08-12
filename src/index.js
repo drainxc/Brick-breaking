@@ -12,6 +12,8 @@ let speedY = 5;
 let playerX = 750;
 let playerY = 675;
 
+let death = false;
+
 function circle() {
     ctx.beginPath();
     ctx.arc(circleX, circleY, radius, 0, Math.PI*2);
@@ -23,6 +25,15 @@ function circle() {
     }
     if (circleY - radius < 0 || (circleY + radius > playerY && circleX + radius > playerX && circleX - radius < playerX + 250)) {
         speedY *= -1;
+    }
+    if (circleY + radius > canvas.height) {
+        if (!death) {
+            let input = confirm('gameover\n다시 하시겠습니까?');
+            if (input) {
+                location.reload();
+            }
+            death = true;
+        }
     }
     circleY += speedY;
     circleX += speedX;

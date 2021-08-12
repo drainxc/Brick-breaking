@@ -9,6 +9,8 @@ let circleY = 350;
 let radius = 20;
 let speedX = 5;
 let speedY = 5;
+let playerX = 750;
+let playerY = 675;
 
 function circle() {
     ctx.beginPath();
@@ -26,7 +28,13 @@ function circle() {
     circleX += speedX;
 }
 
+function bar() {
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(playerX, playerY, 250, 20);
+}
+
 setInterval(function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     circle();
+    bar();
 }, 20) 

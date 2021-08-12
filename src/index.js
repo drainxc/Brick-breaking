@@ -29,12 +29,14 @@ function circle() {
 }
 
 function bar() {
+    if (playerX <= 0) { playerX = 0; }
+    if (playerX + 250 >= canvas.width) { playerX = canvas.width - 250; }
     ctx.fillStyle = 'blue';
     ctx.fillRect(playerX, playerY, 250, 20);
 }
 
 function onMove(event) {
-    playerX = event.offsetX;
+    playerX = event.offsetX - 125;
 }
 
 setInterval(function () {

@@ -7,8 +7,8 @@ canvas.height = 700;
 let circleX = 750;
 let circleY = 350;
 let radius = 20;
-let speedX = 7;
-let speedY = 7;
+let speedX = 10;
+let speedY = 10;
 let playerX = 750;
 let playerY = 675;
 
@@ -42,12 +42,17 @@ function circle() {
         } // 벽이나 바에 튕겼을 때
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 4; j++) {
-                if (circleY - radius < j * 50 + 50 && circleX + radius > i * 185 + 10 && circleX - radius < i * 185 + 185) {
+                if (circleY - radius < j * 50 + 50 && circleY + radius > j * 50 + 10 && circleX + radius > i * 185 + 10 && circleX - radius < i * 185 + 185) {
+                    if (circleY - 10 < j * 50 + 50 && circleY - 10 > j * 50 + 10) {
+                        if (bricks[i][j]) {
+                            speedX *= -1
+                            circleX += speedX;
+                        }
+                    }
                     if (bricks[i][j]) {
                         speedY *= -1
                         circleY += speedY;
                     }
-                    
                     bricks[i][j] = false;
                 }
             }

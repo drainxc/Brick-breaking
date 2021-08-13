@@ -11,6 +11,9 @@ let speedX = 7;
 let speedY = 7;
 let playerX = 750;
 let playerY = 675;
+let bricks = [];
+let brickX = [];
+let brickY = [];
 
 let game = false;
 let death = false;
@@ -45,6 +48,17 @@ function circle() {
     }
 }
 
+function brick() {
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 4; j++) {
+            brickX[i] =  i * 185 + 10;
+            brickY[j] = j * 50 + 10;
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(brickX[i], brickY[j], 175, 40);
+        }
+    }
+}
+
 function bar() {
     if (playerX <= 0) { playerX = 0; }
     if (playerX + 250 >= canvas.width) { playerX = canvas.width - 250; }
@@ -66,6 +80,7 @@ setInterval(function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     circle();
     bar();
+    brick();
 }, 20) // 그리기
 
 document.addEventListener('click', start);

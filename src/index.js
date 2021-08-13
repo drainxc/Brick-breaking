@@ -11,9 +11,18 @@ let speedX = 7;
 let speedY = 7;
 let playerX = 750;
 let playerY = 675;
+
 let bricks = [];
 let brickX = [];
 let brickY = [];
+for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 4; j++) {
+        bricks[i] = [];
+    }
+    for (let j = 0; j < 4; j++) {
+        bricks[i][j] = true;
+    }
+}
 
 let game = false;
 let death = false;
@@ -31,6 +40,14 @@ function circle() {
         if (circleY - radius < 0 || (circleY + radius > playerY && circleX + radius > playerX && circleX - radius < playerX + 250)) {
             speedY *= -1;
         } // 벽이나 바에 튕겼을 때
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (circleY - radius < j * 50 + 50 && circleX + radius > i * 185 + 10 && circleX - radius < i * 185 + 185) {
+                    speedY *= -1
+                    circleY += speedY;
+                }
+            }
+        }
         if (circleY + radius > canvas.height) {
             if (!death) {
                 let input = confirm('gameover\n다시 하시겠습니까?');
@@ -41,6 +58,7 @@ function circle() {
                 circleY = canvas.height - radius;
             } // 죽었을 때
         }
+        
         if (!death) {
             circleY += speedY;
             circleX += speedX; 
@@ -53,8 +71,10 @@ function brick() {
         for (let j = 0; j < 4; j++) {
             brickX[i] =  i * 185 + 10;
             brickY[j] = j * 50 + 10;
-            ctx.fillStyle = 'blue';
-            ctx.fillRect(brickX[i], brickY[j], 175, 40);
+            if (bricks[i][j]) {
+                ctx.fillStyle = 'blue';
+                ctx.fillRect(brickX[i], brickY[j], 175, 40);
+            }
         }
     }
 }

@@ -45,6 +45,7 @@ function circle() {
                 if (circleY - radius < j * 50 + 50 && circleX + radius > i * 185 + 10 && circleX - radius < i * 185 + 185) {
                     speedY *= -1
                     circleY += speedY;
+                    bricks[i][j] = false;
                 }
             }
         }

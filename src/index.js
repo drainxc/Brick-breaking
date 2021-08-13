@@ -11,6 +11,7 @@ let speedX = 10;
 let speedY = 10;
 let playerX = 750;
 let playerY = 675;
+let num;
 
 let bricks = [];
 let brickX = [];
@@ -80,6 +81,15 @@ function brick() {
         for (let j = 0; j < 4; j++) {
             brickX[i] =  i * 185 + 10;
             brickY[j] = j * 50 + 10;
+            if (!bricks[i][j]) {
+                num++;
+                if (num == 32) {
+                    alert('')
+                }
+            }
+            else {
+                num = 0;
+            }
             if (bricks[i][j]) {
                 ctx.fillStyle = 'blue';
                 ctx.fillRect(brickX[i], brickY[j], 175, 40);

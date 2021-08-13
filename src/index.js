@@ -43,8 +43,11 @@ function circle() {
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 4; j++) {
                 if (circleY - radius < j * 50 + 50 && circleX + radius > i * 185 + 10 && circleX - radius < i * 185 + 185) {
-                    speedY *= -1
-                    circleY += speedY;
+                    if (bricks[i][j]) {
+                        speedY *= -1
+                        circleY += speedY;
+                    }
+                    
                     bricks[i][j] = false;
                 }
             }

@@ -28,6 +28,12 @@ for (let i = 0; i < 8; i++) {
 let game = false;
 let death = false;
 
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function circle() {
     ctx.beginPath();
     ctx.arc(circleX, circleY, radius, 0, Math.PI * 2);
@@ -84,7 +90,7 @@ function brick() {
             if (!bricks[i][j]) {
                 num++;
                 if (num == 32) {
-                    alert('')
+                    alert('❤축하드립니다!❤');
                 }
             }
             else {
@@ -112,6 +118,25 @@ function onMove(event) {
 function start() {
     if (!game && !death) {
         game = true;
+        let randomNum = getRandomIntInclusive(1, 4);
+        switch (randomNum) {
+            case 1 : 
+                speedX *= 1;
+                speedY *= 1;
+                break;
+            case 2 :
+                speedX *= 1;
+                speedY *= -1;
+                break;
+            case 3 :
+                speedX *= -1;
+                speedY *= 1;
+                break;
+            case 4 :
+                speedX *= -1;
+                speedY *= -1;
+                break;
+        }
     }
 } // 게임 시작
 

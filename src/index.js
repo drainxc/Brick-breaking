@@ -74,10 +74,10 @@ function circle() {
                 circleY = canvas.height - radius;
             } // 죽었을 때
         }
-        
+
         if (!death) {
             circleY += speedY;
-            circleX += speedX; 
+            circleX += speedX;
         } // 공 속도
     }
 }
@@ -85,7 +85,7 @@ function circle() {
 function brick() {
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 4; j++) {
-            brickX[i] =  i * 185 + 10;
+            brickX[i] = i * 185 + 10;
             brickY[j] = j * 50 + 10;
             if (!bricks[i][j]) {
                 num++;
@@ -119,19 +119,19 @@ function start() {
     if (!game && !death) {
         game = true;
         switch (getRandomIntInclusive(1, 4)) {
-            case 1 : 
+            case 1:
                 speedX *= 1;
                 speedY *= 1;
                 break;
-            case 2 :
+            case 2:
                 speedX *= 1;
                 speedY *= -1;
                 break;
-            case 3 :
+            case 3:
                 speedX *= -1;
                 speedY *= 1;
                 break;
-            case 4 :
+            case 4:
                 speedX *= -1;
                 speedY *= -1;
                 break;

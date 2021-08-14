@@ -4,8 +4,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1500;
 canvas.height = 700;
 
-let circleX = 750;
-let circleY = 350;
+let circleX = getRandomIntInclusive(100, 1400);
+let circleY = getRandomIntInclusive(250, 500);
 let radius = 20;
 let speedX = 10;
 let speedY = 10;

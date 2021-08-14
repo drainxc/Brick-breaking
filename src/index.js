@@ -5,7 +5,7 @@ canvas.width = 1500;
 canvas.height = 700;
 
 let circleX = getRandomIntInclusive(100, 1400);
-let circleY = getRandomIntInclusive(250, 500);
+let circleY = getRandomIntInclusive(250, 500); // 공 위치 랜덤
 let radius = 20;
 let speedX = 10;
 let speedY = 10;
@@ -32,7 +32,7 @@ function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+} // 랜덤 함수
 
 function circle() {
     ctx.beginPath();
@@ -63,13 +63,13 @@ function circle() {
                     bricks[i][j] = false;
                 }
             }
-        }
+        } // 공이 벽돌에 튕겼을 때
         if (circleY + radius > canvas.height) {
             if (!death) {
                 let input = confirm('gameover\n다시 하시겠습니까?');
                 if (input) {
                     location.reload();
-                }
+                } // 다시 시작
                 death = true;
                 circleY = canvas.height - radius;
             } // 죽었을 때
@@ -91,7 +91,7 @@ function brick() {
                 num++;
                 if (num == 32) {
                     alert('❤축하드립니다!❤');
-                }
+                } // 모두 맞췄을 시
             }
             else {
                 num = 0;
@@ -99,7 +99,7 @@ function brick() {
             if (bricks[i][j]) {
                 ctx.fillStyle = 'blue';
                 ctx.fillRect(brickX[i], brickY[j], 175, 40);
-            }
+            } // 벽돌 그리기
         }
     }
 }
@@ -118,8 +118,7 @@ function onMove(event) {
 function start() {
     if (!game && !death) {
         game = true;
-        let randomNum = getRandomIntInclusive(1, 4);
-        switch (randomNum) {
+        switch (getRandomIntInclusive(1, 4)) {
             case 1 : 
                 speedX *= 1;
                 speedY *= 1;
@@ -136,7 +135,7 @@ function start() {
                 speedX *= -1;
                 speedY *= -1;
                 break;
-        }
+        } // 처음 공 방향 랜덤
     }
 } // 게임 시작
 

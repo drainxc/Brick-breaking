@@ -97,7 +97,20 @@ function brick() {
                 num = 0;
             }
             if (bricks[i][j]) {
-                ctx.fillStyle = 'blue';
+                switch (j) {
+                    case 0:
+                        ctx.fillStyle = 'rgb(255, 62, 62)';
+                        break;
+                    case 1:
+                        ctx.fillStyle = 'rgb(255, 255, 78)';
+                        break;
+                    case 2:
+                        ctx.fillStyle = 'greenyellow';
+                        break;
+                    case 3:
+                        ctx.fillStyle = 'rgb(50, 50, 255)';
+                        break;
+                }
                 ctx.fillRect(brickX[i], brickY[j], 175, 40);
             } // 벽돌 그리기
         }

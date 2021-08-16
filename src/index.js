@@ -30,6 +30,7 @@ let death = false;
 
 let bounceSound1 = new Audio('../asset/sound/bounceSound1.mp3');
 let bounceSound2 = new Audio('../asset/sound/bounceSound2.mp3');
+let deathSound = new Audio('../asset/sound/deathSound.mp3');
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -75,6 +76,7 @@ function circle() {
         } // 공이 벽돌에 튕겼을 때
         if (circleY + radius > canvas.height) {
             if (!death) {
+                deathSound.play();
                 let input = confirm('gameover\n다시 하시겠습니까?');
                 if (input) {
                     location.reload();

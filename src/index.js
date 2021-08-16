@@ -7,8 +7,9 @@ canvas.height = 700; // 캔버스 크기
 let circleX = getRandomIntInclusive(100, 1400);
 let circleY = getRandomIntInclusive(250, 500); // 공 위치 랜덤
 let radius = 20;
-let speedX = 15;
-let speedY = 15;
+let speedX = 5;
+let speedY = 5;
+let speed = 0.005;
 let playerX = 750;
 let playerY = 675;
 let num;
@@ -90,6 +91,19 @@ function circle() {
         if (!death) {
             circleY += speedY;
             circleX += speedX;
+            if (speedX > 0) {
+                speedX += speed;
+            }
+            else {
+                speedX -= speed;
+            }
+            if (speedY > 0) {
+                speedY += speed;
+            }
+            else {
+                speedY -= speed;
+            }
+            
         } // 공 속도
     }
 }

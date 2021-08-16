@@ -28,6 +28,9 @@ for (let i = 0; i < 8; i++) {
 let game = false;
 let death = false;
 
+let bounceSound1 = new Audio('../asset/sound/bounceSound1.mp3');
+let bounceSound2 = new Audio('../asset/sound/bounceSound2.mp3');
+
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -44,9 +47,13 @@ function circle() {
         if (circleX - radius < 0 || circleX + radius > canvas.width) {
             speedX *= -1;
         }
-        if (circleY - radius < 0 || (circleY + radius > playerY && circleX + radius > playerX && circleX - radius < playerX + 250)) {
+        if (circleY - radius < 0) {
             speedY *= -1;
-        } // 벽이나 바에 튕겼을 때
+        } // 벽에 튕겼을 때
+        if ((circleY + radius > playerY && circleX + radius > playerX && circleX - radius < playerX + 250)) {
+            speedY *= -1;
+            bounceSound1.play();
+        }
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 4; j++) {
                 if (circleY - radius < j * 50 + 50 && circleY + radius > j * 50 + 10 && circleX + radius > i * 185 + 10 && circleX - radius < i * 185 + 185) {
@@ -54,11 +61,13 @@ function circle() {
                         if (bricks[i][j]) {
                             speedX *= -1
                             circleX += speedX;
+                            bounceSound2.play();
                         }
                     }
                     if (bricks[i][j]) {
                         speedY *= -1
                         circleY += speedY;
+                        bounceSound2.play();
                     }
                     bricks[i][j] = false;
                 }
@@ -137,22 +146,14 @@ function onMove(event) {
 function start() {
     if (!game && !death) {
         game = true;
-        switch (getRandomIntInclusive(1, 4)) {
+        switch (getRandomIntInclusive(1, 2)) {
             case 1:
                 speedX *= 1;
                 speedY *= 1;
                 break;
             case 2:
-                speedX *= 1;
-                speedY *= -1;
-                break;
-            case 3:
                 speedX *= -1;
                 speedY *= 1;
-                break;
-            case 4:
-                speedX *= -1;
-                speedY *= -1;
                 break;
         } // 처음 공 방향 랜덤
     }

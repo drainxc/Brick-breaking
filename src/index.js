@@ -7,8 +7,8 @@ canvas.height = 700;
 let circleX = getRandomIntInclusive(100, 1400);
 let circleY = getRandomIntInclusive(250, 500); // 공 위치 랜덤
 let radius = 20;
-let speedX = 10;
-let speedY = 10;
+let speedX = 15;
+let speedY = 15;
 let playerX = 750;
 let playerY = 675;
 let num;
@@ -71,6 +71,7 @@ function circle() {
                     location.reload();
                 } // 다시 시작
                 death = true;
+                game = false;
                 circleY = canvas.height - radius;
             } // 죽었을 때
         }
@@ -90,7 +91,12 @@ function brick() {
             if (!bricks[i][j]) {
                 num++;
                 if (num == 32) {
-                    alert('❤축하드립니다!❤');
+                    let input = confirm('❤축하드립니다❤\n다시 하시겠습니까?');
+                    if (input) {
+                        location.reload();
+                    }
+                    death = true;
+                    game = false;
                 } // 모두 맞췄을 시
             }
             else {

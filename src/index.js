@@ -37,7 +37,7 @@ function getRandomIntInclusive(min, max) {
 function circle() {
     ctx.beginPath();
     ctx.arc(circleX, circleY, radius, 0, Math.PI * 2);
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = 'blue';
     ctx.fill();
     ctx.closePath(); // 공 그리기
     if (game && !death) {

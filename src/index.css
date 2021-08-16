@@ -1,6 +1,16 @@
 canvas {
     background-color: white;
     border: 1px solid black;
+    
+    background-image: url("../asset/img/space.jpg");
+    height: 100%; 
+  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main {

@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 canvas.width = 1500;
-canvas.height = 700;
+canvas.height = 700; // 캔버스 크기
 
 let circleX = getRandomIntInclusive(100, 1400);
 let circleY = getRandomIntInclusive(250, 500); // 공 위치 랜덤
@@ -23,14 +23,14 @@ for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 4; j++) {
         bricks[i][j] = true;
     }
-}
+} // 벽돌 선언
 
 let game = false;
 let death = false;
 
 let bounceSound1 = new Audio('../asset/sound/bounceSound1.mp3');
 let bounceSound2 = new Audio('../asset/sound/bounceSound2.mp3');
-let deathSound = new Audio('../asset/sound/deathSound.mp3');
+let deathSound = new Audio('../asset/sound/deathSound.mp3'); // 사운드
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -41,7 +41,7 @@ function getRandomIntInclusive(min, max) {
 function circle() {
     ctx.beginPath();
     ctx.arc(circleX, circleY, radius, 0, Math.PI * 2);
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "white"; // 하얀색으로 색칠
     ctx.fill();
     ctx.closePath(); // 공 그리기
     if (game && !death) {
@@ -53,8 +53,8 @@ function circle() {
         } // 벽에 튕겼을 때
         if ((circleY + radius > playerY && circleX + radius > playerX && circleX - radius < playerX + 250)) {
             speedY *= -1;
-            bounceSound1.play();
-        }
+            bounceSound1.play(); // bounceSound1 재생
+        } // 벽돌에 튕겼을 때
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 4; j++) {
                 if (circleY - radius < j * 50 + 50 && circleY + radius > j * 50 + 10 && circleX + radius > i * 185 + 10 && circleX - radius < i * 185 + 185) {
@@ -62,7 +62,7 @@ function circle() {
                         if (bricks[i][j]) {
                             speedX *= -1
                             circleX += speedX;
-                            bounceSound2.play();
+                            bounceSound2.play(); // bounceSound2 재생
                         }
                     }
                     if (bricks[i][j]) {
@@ -76,7 +76,7 @@ function circle() {
         } // 공이 벽돌에 튕겼을 때
         if (circleY + radius > canvas.height) {
             if (!death) {
-                deathSound.play();
+                deathSound.play(); // deathSound 재생
                 let input = confirm('gameover\n다시 하시겠습니까?');
                 if (input) {
                     location.reload();
@@ -127,7 +127,7 @@ function brick() {
                     case 3:
                         ctx.fillStyle = 'rgb(50, 50, 255)';
                         break;
-                }
+                } // 줄에 따른 벽돌 색깔
                 ctx.fillRect(brickX[i], brickY[j], 175, 40);
             } // 벽돌 그리기
         }
